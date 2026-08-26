@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+import sys
+def parse_arguments(arg: str, items: dict) -> dict:
+    if ':' not in arg:
+        print(f"Error - invalid parameter '{arg}'")
+        return {}
+    tmp = {}
+    parsed = []
+    for item in arg.split(':'):
+            parsed.append(str(item))
+    if parsed[0] not in items:
+        try:
+            tmp[parsed[0]] = int(parsed[1])
+        except ValueError as e:
+            print(f"Quantity error for 'key': {e}")
+            return {}
+    else:
+        print(f"Redundant item '{parsed[0]}' - discarding")
+        return {}
+    return tmp
+
+
+if "__main__" == __name__:
+    print("=== Inventory System Analysis ===")
+    items = {}
+    i = 1
+    while i < len(sys.argv):
+            items = items | parse_arguments(sys.argv[i], items)
+            i += 1
+    if items:
+        print(f"Got inventory: {items}")
+        print(f"Item list: {list(items)}")
+        print(f"Total quantity of the {len(items.keys())} items: {sum(items.values())}")
+        for key in items.keys():
+            print(f"Item {key} represents {round(((items[key] / sum(items.values())) * 100), 1)}%")
+        max_key = max(items, key=items.get)
+        max_value = items[max_key]
+        print(f"Item most abundant: {max_key} with quantity {max_value}")
+        min_key = min(items, key=items.get)
+        min_value = items[min_key]
+        print(f"Item least abundant: {min_key} with quantity {min_value}")
+        items = items | parse_arguments("magic_item:1", items)
+        print(f"Updated inventory: {items}")
