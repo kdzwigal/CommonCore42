@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 import sys
+
+
 def parse_arguments(arg: str, items: dict) -> dict:
     if ':' not in arg:
         print(f"Error - invalid parameter '{arg}'")
@@ -7,7 +9,7 @@ def parse_arguments(arg: str, items: dict) -> dict:
     tmp = {}
     parsed = []
     for item in arg.split(':'):
-            parsed.append(str(item))
+        parsed.append(str(item))
     if parsed[0] not in items:
         try:
             tmp[parsed[0]] = int(parsed[1])
@@ -22,21 +24,23 @@ def parse_arguments(arg: str, items: dict) -> dict:
 
 if "__main__" == __name__:
     print("=== Inventory System Analysis ===")
-    items = {}
+    items: dict[str, int] = {}
     i = 1
     while i < len(sys.argv):
-            items = items | parse_arguments(sys.argv[i], items)
-            i += 1
+        items = items | parse_arguments(sys.argv[i], items)
+        i += 1
     if items:
         print(f"Got inventory: {items}")
         print(f"Item list: {list(items)}")
-        print(f"Total quantity of the {len(items.keys())} items: {sum(items.values())}")
+        print(f"Total quantity of the {len(items.keys())} items: "
+              f"{sum(items.values())}")
         for key in items.keys():
-            print(f"Item {key} represents {round(((items[key] / sum(items.values())) * 100), 1)}%")
-        max_key = max(items, key=items.get)
+            print(f"Item {key} represents "
+                  f"{round(((items[key] / sum(items.values())) * 100), 1)}%")
+        max_key = max(items, key=lambda k: items[k])
         max_value = items[max_key]
         print(f"Item most abundant: {max_key} with quantity {max_value}")
-        min_key = min(items, key=items.get)
+        min_key = min(items, key=lambda k: items[k])
         min_value = items[min_key]
         print(f"Item least abundant: {min_key} with quantity {min_value}")
         items = items | parse_arguments("magic_item:1", items)
