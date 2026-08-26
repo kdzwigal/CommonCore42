@@ -41,7 +41,11 @@ def test_error_types_one_try():
             print(f"Caught an error: {e}")
 
 
-if __name__ == '__main__':
+def main() -> None:
     test_error_types()
     print("\nAll error types tested successfully!")
     test_error_types_one_try()
+
+
+if __name__ == '__main__':
+    main()

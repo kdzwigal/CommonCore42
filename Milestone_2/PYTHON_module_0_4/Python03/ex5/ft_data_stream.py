@@ -17,7 +17,7 @@ def consume_event(to_del: list[tuple]) \
         yield chosed
 
 
-if __name__ == '__main__':
+def main() -> None:
     print("=== Game Data Stream Processor ===")
     players = ["alice", "charlie", "dylan", "bob"]
     actions = ["run", "grab", "move", "jump", "use", "climb"]
@@ -33,3 +33,7 @@ if __name__ == '__main__':
     for consumed_event in consume_event(ten_tupl):
         print(f"Got event from list: {consumed_event}")
         print(f"Remains in list: {ten_tupl}")
+
+
+if __name__ == '__main__':
+    main()

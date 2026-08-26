@@ -131,7 +131,7 @@ def display_plant_statistics(plant: Plant) -> None:
     plant.stats.display()
 
 
-if __name__ == '__main__':
+def main() -> None:
     print("=== Garden statistics ===")
 
     print("=== Check year-old")
@@ -169,3 +169,7 @@ if __name__ == '__main__':
     anonymous.show()
     display_plant_statistics(anonymous)
     print("")
+
+
+if __name__ == '__main__':
+    main()

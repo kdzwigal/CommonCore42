@@ -10,7 +10,7 @@ class Plant:
         print(f"{self.name.capitalize()}: {self.heigh}cm, {self.age} days old")
 
 
-if __name__ == '__main__':
+def main() -> None:
     print("=== Garden Plant Registry ===")
     rose = Plant("Rose", 60, 2)
     rose.show()
@@ -22,3 +22,7 @@ if __name__ == '__main__':
     tree.show()
     grass = Plant("Grass", 30, 10)
     grass.show()
+
+
+if __name__ == '__main__':
+    main()

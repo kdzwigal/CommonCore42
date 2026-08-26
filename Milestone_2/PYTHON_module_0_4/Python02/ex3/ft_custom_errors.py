@@ -49,6 +49,10 @@ def test_custom_errors() -> None:
         print(f"Caught GardenError: {e}")
 
 
-if __name__ == "__main__":
+def main() -> None:
     test_custom_errors()
     print("\nAll custom error types work correctly!")
+
+
+if __name__ == "__main__":
+    main()

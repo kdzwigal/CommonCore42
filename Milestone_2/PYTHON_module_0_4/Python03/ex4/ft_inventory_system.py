@@ -22,7 +22,8 @@ def parse_arguments(arg: str, items: dict) -> dict:
     return tmp
 
 
-if "__main__" == __name__:
+def main() -> None:
+    global items
     print("=== Inventory System Analysis ===")
     items: dict[str, int] = {}
     i = 1
@@ -45,3 +46,7 @@ if "__main__" == __name__:
         print(f"Item least abundant: {min_key} with quantity {min_value}")
         items = items | parse_arguments("magic_item:1", items)
         print(f"Updated inventory: {items}")
+
+
+if "__main__" == __name__:
+    main()

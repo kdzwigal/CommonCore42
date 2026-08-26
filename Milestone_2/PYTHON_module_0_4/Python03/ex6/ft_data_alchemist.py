@@ -2,7 +2,7 @@
 import random
 
 
-if __name__ == "__main__":
+def main() -> None:
     init_list = ["Alice", "bob", "Charlie", "dylan",
                  "Emma", "Gregory", "john", "kevin", "Liam"]
     print("=== Game Data Alchemist ===")
@@ -18,3 +18,7 @@ if __name__ == "__main__":
     high_scores = {name: score for name, score in score_dict.items()
                    if score > average_score}
     print(f"High scores: {high_scores}")
+
+
+if __name__ == "__main__":
+    main()

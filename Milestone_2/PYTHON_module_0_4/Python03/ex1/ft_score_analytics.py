@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import sys
-if __name__ == "__main__":
+
+
+def main() -> None:
     print("=== Player Score Analytics ===")
     scores = []
     i = 1
@@ -22,3 +24,7 @@ if __name__ == "__main__":
         print("No scores provided. Usage: python3 ft_score_analytics.py "
               "<score1> <score2> ...")
     sys.exit()
+
+
+if __name__ == "__main__":
+    main()

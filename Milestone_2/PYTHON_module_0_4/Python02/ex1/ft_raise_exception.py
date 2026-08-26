@@ -42,7 +42,11 @@ def test_temperature() -> None:
         print(f"Caught input_temperature error: {e}\n")
 
 
-if __name__ == "__main__":
+def main() -> None:
     print("=== Garden Temperature ===\n")
     test_temperature()
     print("All tests completed - program didn't crash!")
+
+
+if __name__ == "__main__":
+    main()

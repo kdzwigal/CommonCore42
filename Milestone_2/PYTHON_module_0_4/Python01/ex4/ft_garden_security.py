@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 class Plant:
-    garden: list['Plant'] = []
 
     def __init__(self, name: str, height: float, age: int) -> None:
         self.name = name
@@ -17,7 +16,6 @@ class Plant:
             print("Error, age can't be negative")
         print(f"Plant created: {self.name.capitalize()}: "
               f"{self._height:.1f}cm, {self._age} days old")
-        Plant.garden.append(self)
 
     def show(self):
         print(f"Current state: {self.name.capitalize()}: "
@@ -47,7 +45,7 @@ class Plant:
             print("Age update rejected")
 
 
-if __name__ == '__main__':
+def main() -> None:
     print("=== Garden Security System ===")
     rose = Plant("Rose", 15, 10)
     print("")
@@ -58,3 +56,7 @@ if __name__ == '__main__':
     rose.set_age(-5)
     print("")
     rose.show()
+
+
+if __name__ == '__main__':
+    main()

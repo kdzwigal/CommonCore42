@@ -22,7 +22,8 @@ class Plant:
         self.show()
 
 
-if __name__ == '__main__':
+def main() -> None:
+    global i
     rose = Plant("Rose", 25, 30)
     for i in range(0, 8):
         if i == 0:
@@ -31,3 +32,7 @@ if __name__ == '__main__':
         else:
             rose.grow()
     print(f"Growth this week: {(rose.height - rose.init_height):.1f}cm")
+
+
+if __name__ == '__main__':
+    main()
