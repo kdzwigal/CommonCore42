@@ -8,10 +8,20 @@ def read_and_print(file: typing.IO) -> None:
         print(line.rstrip())
 
 def op_file(name: str) -> None:
-    print("=== Cyber Archives Recover ===")
+    print("=== Cyber Archives Recovery ===")
     print(f"Accessing file '{name}'")
-    file = open(name, "r")
-    read_and_print(file)
+    try:
+        file = open(name, "r")
+    except FileNotFoundError as e:
+        print(f"Error opening file '{name}': {e}")
+        file = None
+    if file is not None:
+        print("---\n")
+        read_and_print(file)
+        print("\n---")
+        file.close()
+        print(f"File '{name}' closed.")
+
 
 
 
