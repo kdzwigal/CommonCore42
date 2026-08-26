@@ -71,7 +71,7 @@ class Vegetable(Plant):
             self.age()
 
 
-if __name__ == '__main__':
+def main() -> None:
     print("=== Garden Plant Types ===")
     rose = Flower("rose", 15, 10, "red")
     print("=== Flower")
@@ -90,3 +90,7 @@ if __name__ == '__main__':
     tomato.grow(20)
     tomato.show()
     print("")
+
+
+if __name__ == '__main__':
+    main()
