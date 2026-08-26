@@ -23,12 +23,11 @@ def parse_arguments(arg: str, items: dict) -> dict:
 
 
 def main() -> None:
-    global items
     print("=== Inventory System Analysis ===")
     items: dict[str, int] = {}
     i = 1
     while i < len(sys.argv):
-        items = items | parse_arguments(sys.argv[i], items)
+        items |= parse_arguments(sys.argv[i], items)
         i += 1
     if items:
         print(f"Got inventory: {items}")
@@ -48,5 +47,5 @@ def main() -> None:
         print(f"Updated inventory: {items}")
 
 
-if "__main__" == __name__:
+if __name__ == "__main__":
     main()

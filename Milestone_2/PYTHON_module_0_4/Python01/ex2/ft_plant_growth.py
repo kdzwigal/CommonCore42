@@ -23,7 +23,6 @@ class Plant:
 
 
 def main() -> None:
-    global i
     rose = Plant("Rose", 25, 30)
     for i in range(0, 8):
         if i == 0:

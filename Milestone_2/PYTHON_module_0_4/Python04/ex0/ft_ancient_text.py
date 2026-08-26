@@ -4,8 +4,10 @@ import typing
 
 
 def read_and_print(file: typing.IO) -> None:
-    for line in file:
-        print(line.rstrip())
+    tekst = file.read()
+    for line in tekst.splitlines():
+        print(line)
+
 
 def op_file(name: str) -> None:
     print("=== Cyber Archives Recovery ===")
@@ -23,14 +25,13 @@ def op_file(name: str) -> None:
         print(f"File '{name}' closed.")
 
 
-
-
-def main():
+def main() -> None:
     arguments = len(sys.argv)
     if arguments == 1 or arguments > 2:
         print("Usage: ft_ancient_text.py <file>")
     elif arguments == 2:
         op_file(sys.argv[1])
+    sys.exit(0)
 
 
 if __name__ == "__main__":
