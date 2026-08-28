@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 import math
+from typing import Sequence
 
 
-def get_player_pos() -> tuple:
+def get_player_pos() -> tuple[float, float, float]:
     while True:
         user_input = input("Enter new coordinates as floats in format "
                            "'x,y,z': ")
@@ -21,7 +22,7 @@ def get_player_pos() -> tuple:
                 error_found = True
                 break
         if not error_found:
-            return tuple(coords)
+            return (coords[0], coords[1], coords[2])
 
 
 def main() -> None:

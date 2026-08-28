@@ -3,7 +3,7 @@ import sys
 import typing
 
 
-def read_and_print(file: typing.IO) -> None:
+def read_and_print(file: typing.IO[str]) -> None:
     tekst = file.read()
     for line in tekst.splitlines():
         print(line)

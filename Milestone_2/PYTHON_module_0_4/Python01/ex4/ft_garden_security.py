@@ -17,7 +17,7 @@ class Plant:
         print(f"Plant created: {self.name.capitalize()}: "
               f"{self._height:.1f}cm, {self._age} days old")
 
-    def show(self):
+    def show(self) -> None:
         print(f"Current state: {self.name.capitalize()}: "
               f"{self.get_height():.1f}cm, {self.get_age()} days old")
 

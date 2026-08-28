@@ -6,7 +6,7 @@ class Plant:
         self.height = height
         self.plant_age = age
 
-    def show(self):
+    def show(self) -> None:
         print(f"{self.name.capitalize()}: "
               f"{self.height:.1f}cm, {self.plant_age} days old")
 

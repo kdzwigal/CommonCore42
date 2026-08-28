@@ -2,7 +2,7 @@
 import random
 
 
-def gen_player_achievements(player_achievements: list) -> set:
+def gen_player_achievements(player_achievements: list[str]) -> set[str]:
     set_length = len(player_achievements)
     how_many = random.randint(4, set_length)
     ret_set = set()

@@ -7,15 +7,14 @@ class Plant:
         self.plant_age = plant_age
         self.init_height = height
 
-    def show(self):
+    def show(self) -> None:
         print(f"{self.name.capitalize()}: "
               f"{self.height:.1f}cm, {self.plant_age} days old")
 
-    def age(self):
+    def age(self) -> None:
         self.plant_age += 1
 
-    def grow(self):
-        print(f"=== Day {i} ===")
+    def grow(self) -> None:
         self.height += (self.height / self.plant_age)
         self.height = round(self.height, 1)
         self.age()
@@ -29,6 +28,7 @@ def main() -> None:
             print("=== Garden Plant growth ===")
             rose.show()
         else:
+            print(f"=== Day {i} ===")
             rose.grow()
     print(f"Growth this week: {(rose.height - rose.init_height):.1f}cm")
 

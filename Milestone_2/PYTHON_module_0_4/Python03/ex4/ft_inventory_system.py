@@ -2,7 +2,7 @@
 import sys
 
 
-def parse_arguments(arg: str, items: dict) -> dict:
+def parse_arguments(arg: str, items: dict[str, int]) -> dict[str, int]:
     if ':' not in arg:
         print(f"Error - invalid parameter '{arg}'")
         return {}

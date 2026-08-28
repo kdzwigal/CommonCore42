@@ -19,7 +19,7 @@ class Plant:
         self.plant_age = age
         self.stats = self.Stats()
 
-    def show(self):
+    def show(self) -> None:
         self.stats.show_calls += 1
         print(f"{self.name.capitalize()}: "
               f"{self.height:.1f}cm, {self.plant_age} days old")

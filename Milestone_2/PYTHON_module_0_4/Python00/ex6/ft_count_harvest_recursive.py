@@ -1,5 +1,5 @@
-def ft_count_harvest_recursive():
-    def recursion(i, day):
+def ft_count_harvest_recursive() -> None:
+    def recursion(i: int, day: int) -> None:
         if i <= day:
             print(f"Day {i}")
             i += 1

@@ -9,7 +9,7 @@ def gen_event(players: list[str], actions: list[str]) \
         yield (random.choice(players), random.choice(actions))
 
 
-def consume_event(to_del: list[tuple]) \
+def consume_event(to_del: list[tuple[str, str]]) \
         -> typing.Generator[typing.Tuple[str, str], None, None]:
     for _ in range(len(to_del)):
         chosed = random.choice(to_del)

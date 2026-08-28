@@ -3,16 +3,16 @@ import sys
 import typing
 
 
-def add_hash_and_save(file: typing.IO) -> None:
+def add_hash_and_save(file: typing.IO[str]) -> None:
     tekst = file.read()
     print("Transform data:")
     print("---\n")
-    new_tekst = [line + "#" for line in tekst.splitlines()]
-    new_tekst = "\n".join(new_tekst)
+    hashed_lines = [line + "#" for line in tekst.splitlines()]
+    new_tekst = "\n".join(hashed_lines)
     for line in new_tekst.splitlines():
         print(line)
     print("\n---")
-    new_file = str(input(f"Enter new file name (or empty): "))
+    new_file = str(input("Enter new file name (or empty): "))
     if new_file == "":
         print("Not saving data.")
         return
@@ -23,7 +23,7 @@ def add_hash_and_save(file: typing.IO) -> None:
             print(f"Data saved in file '{new_file}'.")
 
 
-def read_and_print(file: typing.IO) -> None:
+def read_and_print(file: typing.IO[str]) -> None:
     tekst = file.read()
     for line in tekst.splitlines():
         print(line)

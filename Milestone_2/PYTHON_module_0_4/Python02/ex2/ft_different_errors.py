@@ -12,7 +12,8 @@ def garden_operations(operation_number: int) -> None:
         return
 
 
-def test_error_types():
+def test_error_types() -> None:
+    print("=== Garden Error Types Demo ===")
     print("=== Garden Error Types Demo ===")
     for i in [0, 1, 2, 3, 4]:
         print(f"Testing operation {i}...")
@@ -30,7 +31,7 @@ def test_error_types():
             print("Operation completed successfully")
 
 
-def test_error_types_one_try():
+def test_error_types_one_try() -> None:
     print("=== Garden Error Types Demo ===")
     for i in [0, 1, 2, 3, 4]:
         print(f"Testing operation {i}...")
