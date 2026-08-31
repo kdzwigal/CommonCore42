@@ -7,3 +7,4 @@ exclude =
     env,
     build,
     dist,
+    day_night.py
