@@ -9,7 +9,7 @@ class Plant:
 
     def show(self) -> None:
         print(f"{self.name.capitalize()}: "
-              f"{self.height:.1f}cm, {self.plant_age} days old")
+              f"{round(self.height, 1)}cm, {self.plant_age} days old")
 
     def age(self) -> None:
         self.plant_age += 1
@@ -22,7 +22,7 @@ class Plant:
 
 
 def main() -> None:
-    rose = Plant("Rose", 25, 30)
+    rose = Plant("Rose", 25.0, 30)
     for i in range(0, 8):
         if i == 0:
             print("=== Garden Plant growth ===")
