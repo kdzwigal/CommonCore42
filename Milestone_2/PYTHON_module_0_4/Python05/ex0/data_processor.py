@@ -5,7 +5,7 @@ from abc import abstractmethod, ABC
 class DataProcessor(ABC):
 
     def output(self) -> tuple[int, str]:
-        pass
+        passa
 
     @abstractmethod
     def validate(self, data: typing.Any) -> bool:
