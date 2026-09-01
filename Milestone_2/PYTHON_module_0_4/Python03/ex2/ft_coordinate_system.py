@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import math
-from typing import Sequence
 
 
 def get_player_pos() -> tuple[float, float, float]:
