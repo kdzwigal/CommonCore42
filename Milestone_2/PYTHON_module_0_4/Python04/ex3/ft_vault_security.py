@@ -5,8 +5,6 @@ import sys
 def secure_archive(file_name: str, opt: str, to_write: str) \
         -> tuple[bool, str]:
 
-    print("=== Cyber Archives Security ===\n")
-
     if opt.lower() == "write":
         try:
             with open(file_name, "x") as file:
@@ -43,7 +41,7 @@ def secure_archive(file_name: str, opt: str, to_write: str) \
 
 
 def archive_test() -> None:
-
+    print("=== Cyber Archives Security ===\n")
     print(secure_archive("/not/existing/file", "read", ""))
     print("")
     print(secure_archive("nonaccess", "read", ""))
