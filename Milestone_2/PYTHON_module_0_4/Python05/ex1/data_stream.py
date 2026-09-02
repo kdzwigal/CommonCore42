@@ -86,6 +86,7 @@ class LogProcessor(DataProcessor):
             formatted_string = ": ".join(item.values())
             self._data.append(formatted_string)
 
+
 class DataStream:
     def __init__(self) -> None:
         self._processors: typing.List[DataProcessor] = []
@@ -119,7 +120,8 @@ class DataStream:
         for proc in self._processors:
             total = self._stats[proc]
             remaining = len(proc._data)
-            class_name = proc.__class__.__name__.replace("Processor", " Processor")
+            class_name = proc.__class__.__name__.replace("Processor",
+                                                         " Processor")
             print(f"{class_name}: total {total} items processed, "
                   f"remaining {remaining} on processor")
 

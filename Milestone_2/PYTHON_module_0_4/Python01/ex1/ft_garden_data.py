@@ -14,12 +14,16 @@ def main() -> None:
     print("=== Garden Plant Registry ===")
     rose = Plant("Rose", 60, 2)
     rose.show()
+
     sunflower = Plant("Sunflower", 80, 45)
     sunflower.show()
+
     cactus = Plant("Cactus", 15, 120)
     cactus.show()
+
     tree = Plant("Tree", 30, 10)
     tree.show()
+
     grass = Plant("Grass", 30, 10)
     grass.show()
 

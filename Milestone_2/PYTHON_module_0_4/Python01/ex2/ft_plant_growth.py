@@ -18,7 +18,6 @@ class Plant:
         self.height += (self.height / self.plant_age)
         self.height = round(self.height, 1)
         self.age()
-        self.show()
 
 
 def main() -> None:
@@ -30,7 +29,8 @@ def main() -> None:
         else:
             print(f"=== Day {i} ===")
             rose.grow()
-    print(f"Growth this week: {(rose.height - rose.init_height):.1f}cm")
+            rose.show()
+    print(f"Growth this week: {round((rose.height - rose.init_height), 1)}cm")
 
 
 if __name__ == '__main__':

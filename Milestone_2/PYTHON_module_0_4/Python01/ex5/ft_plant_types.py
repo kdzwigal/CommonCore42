@@ -66,8 +66,8 @@ class Vegetable(Plant):
     def grow(self, days: int) -> None:
         print(f"[make {self.name} grow and age for {days} days]")
         for i in range(0, days):
-            self.height += (self.height / self.plant_age)
-            self.height += round(self.height, 1)
+            temp_grow = (self.height / self.plant_age)
+            self.height += round(temp_grow, 1)
             self.age()
 
 

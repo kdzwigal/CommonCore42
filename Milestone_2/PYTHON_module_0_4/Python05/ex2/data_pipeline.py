@@ -87,6 +87,7 @@ class LogProcessor(DataProcessor):
             formatted_string = ": ".join(item.values())
             self._data.append(formatted_string)
 
+
 class DataStream:
     def __init__(self) -> None:
         self._processors: typing.List[DataProcessor] = []
@@ -120,12 +121,12 @@ class DataStream:
         for proc in self._processors:
             total = self._stats[proc]
             remaining = len(proc._data)
-            class_name = proc.__class__.__name__.replace("Processor", " Processor")
+            class_name = proc.__class__.__name__.replace("Processor",
+                                                         " Processor")
             print(f"{class_name}: total {total} items processed, "
                   f"remaining {remaining} on processor")
 
     def output_pipeline(self, nb: int, plugin: 'ExportPlugin') -> None:
-
 
         for proc in self._processors:
             extracted_data: list[tuple[int, str]] = []
@@ -138,9 +139,11 @@ class DataStream:
             if extracted_data:
                 plugin.process_output(extracted_data)
 
+
 class ExportPlugin(Protocol):
     def process_output(self, data: list[tuple[int, str]]) -> None:
         pass
+
 
 class CSVExportPlugin:
     def process_output(self, data: list[tuple[int, str]]) -> None:
@@ -148,6 +151,7 @@ class CSVExportPlugin:
             return
         print("CSV Output:")
         print(",".join([val for _, val in data]))
+
 
 class JSONExportPlugin:
     def process_output(self, data: list[tuple[int, str]]) -> None:
@@ -178,7 +182,8 @@ def main():
     data_batch_1 = [
         'Hello world',
         [3.14, -1, 2.71],
-        [{'log_level': 'WARNING', 'log_message': 'Telnet access! Use ssh instead'},
+        [{'log_level': 'WARNING', 'log_message': 'Telnet access! '
+                                                 'Use ssh instead'},
          {'log_level': 'INFO', 'log_message': 'User wil is connected'}],
         42,
         ['Hi', 'five']
@@ -198,7 +203,8 @@ def main():
         21,
         ['I love AI', 'LLMs are wonderful', 'Stay healthy'],
         [{'log_level': 'ERROR', 'log_message': '500 server crash'},
-         {'log_level': 'NOTICE', 'log_message': 'Certificate expires in 10 days'}],
+         {'log_level': 'NOTICE', 'log_message': 'Certificate expires '
+                                                'in 10 days'}],
         [32, 42, 64, 84, 128, 168],
         'World hello'
     ]

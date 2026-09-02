@@ -2,7 +2,7 @@
 class Plant:
 
     def __init__(self, name: str, height: float, age: int) -> None:
-        self.name = name
+        self._name = name
         if height >= 0:
             self._height = float(height)
         else:
@@ -14,11 +14,11 @@ class Plant:
         else:
             self._age = 0
             print("Error, age can't be negative")
-        print(f"Plant created: {self.name.capitalize()}: "
+        print(f"Plant created: {self._name.capitalize()}: "
               f"{self._height:.1f}cm, {self._age} days old")
 
     def show(self) -> None:
-        print(f"Current state: {self.name.capitalize()}: "
+        print(f"Current state: {self._name.capitalize()}: "
               f"{self.get_height():.1f}cm, {self.get_age()} days old")
 
     def get_height(self) -> float:
@@ -29,7 +29,7 @@ class Plant:
             self._height = float(height)
             print(f"Height updated: {self._height:.1f}cm")
         else:
-            print(f"{self.name.capitalize()}: Error, height can't be "
+            print(f"{self._name.capitalize()}: Error, height can't be "
                   f"negative")
             print("Height update rejected")
 
@@ -41,7 +41,7 @@ class Plant:
             self._age = int(age)
             print(f"Age updated: {self._age} days")
         else:
-            print(f"{self.name.capitalize()}: Error, age can't be negative")
+            print(f"{self._name.capitalize()}: Error, age can't be negative")
             print("Age update rejected")
 
 
