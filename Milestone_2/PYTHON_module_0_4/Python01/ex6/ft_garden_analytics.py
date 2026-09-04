@@ -45,7 +45,7 @@ class Plant:
             print("True")
 
     @classmethod
-    def anonymous(cls) -> 'Plant':
+    def create_anonymous(cls) -> 'Plant':
         return cls("unknown plant", 0.0, 0)
 
 
@@ -181,8 +181,8 @@ def main() -> None:
     display_plant_statistics(sunflower)
     print("")
 
-    anonymous = Plant.anonymous()
-    print(f"=== {anonymous.__class__.__name__}")
+    anonymous = Plant.create_anonymous()
+    print("=== Anonymous")
     anonymous.show()
     display_plant_statistics(anonymous)
     print("")

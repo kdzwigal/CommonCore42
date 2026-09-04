@@ -1,5 +1,6 @@
 import alchemy.transmutation.recipes as recipes
 
+
 def main():
     print("=== Transmutation 0 ===")
     print("Using file alchemy/transmutation/recipes.py directly")
