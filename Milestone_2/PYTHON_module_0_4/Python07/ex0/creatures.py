@@ -1,8 +1,4 @@
-from typing import TypeVar
 from abc import ABC, abstractmethod
-
-
-T = TypeVar("T")
 
 class Creature(ABC):
     def __init__(self, name: str, type: str) -> None:

@@ -1,5 +1,3 @@
-from pip._internal.resolution.resolvelib import factory
-
 from ex0 import AquaFactory, CreatureFactory, FlameFactory
 
 def test_factory(factory: CreatureFactory) -> None:

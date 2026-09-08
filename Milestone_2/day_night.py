@@ -128,6 +128,7 @@ def main():
 
     # Inicjalizacja piłek
     ball_speed = 40
+    ball_speedd = 5
     ball_radius = 9
 
     # Piłka Dnia (ciemna) - porusza się w jasnym polu, niszczy ciemne klocki
@@ -137,7 +138,7 @@ def main():
 
     # Piłka Nocy (jasna) - porusza się w ciemnym polu, niszczy jasne klocki
     angle_night = random.uniform(math.pi - 0.5, math.pi + 0.5)
-    ball_night = Ball(GRID_WIDTH_PX * 0.75, GRID_HEIGHT_PX / 2, ball_speed, angle_night,
+    ball_night = Ball(GRID_WIDTH_PX * 0.75, GRID_HEIGHT_PX / 2, ball_speedd, angle_night,
                       ball_radius, COLOR_DAY, target_type=0, fill_type=1)
 
     running = True

@@ -16,7 +16,6 @@ class Plant:
             self._age = 0
             print("Error, age can't be negative")
 
-
     def show(self) -> None:
         print(f"{self._name.capitalize()}: "
               f"{round(self.get_height(), 1)}cm, {self.get_age()} days old")

@@ -10,5 +10,3 @@ if __name__ == "__main__":
     print(f"Height: {height}cm")
     print(f"Age: {age} days\n")
     print("=== End of Program ===")
-
-
