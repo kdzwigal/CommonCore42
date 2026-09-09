@@ -1,5 +1,6 @@
 from ex0 import AquaFactory, CreatureFactory, FlameFactory
 
+
 def test_factory(factory: CreatureFactory) -> None:
 
     print("\nTesting factory")
@@ -12,6 +13,7 @@ def test_factory(factory: CreatureFactory) -> None:
     print(evolved_creature.describe())
     print(evolved_creature.attack())
 
+
 def test_battle(factory1: CreatureFactory, factory2: CreatureFactory) -> None:
 
     print("\nTesting battle")
@@ -22,6 +24,7 @@ def test_battle(factory1: CreatureFactory, factory2: CreatureFactory) -> None:
     print(fighter1.attack())
     print(fighter2.attack())
 
+
 def main() -> None:
 
     flame_factory = FlameFactory()
@@ -31,6 +34,7 @@ def main() -> None:
     test_factory(aqua_factory)
 
     test_battle(flame_factory, aqua_factory)
+
 
 if __name__ == "__main__":
     main()
