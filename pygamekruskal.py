@@ -129,7 +129,7 @@ class MazeAnimator:
         self.screen.fill((20, 20, 20))  # Ciemne tło
 
         wall_color = (0, 255, 128)  # Neonowy zielony
-        wall_thickness = 1
+        wall_thickness = 3
 
         for y in range(self.rows):
             for x in range(self.cols):
@@ -181,7 +181,7 @@ class MazeAnimator:
 if __name__ == "__main__":
     try:
         # Rozmiar 24x24 komórki, wielkość pikselowa 30px
-        app = MazeAnimator(cols=30, rows=15, cell_size=3)
+        app = MazeAnimator(cols=30, rows=15, cell_size=30)
         app.run()
     except MazeAnimationError as e:
         print(f"Błąd inicjalizacji: {e}")

@@ -8,32 +8,8 @@ def input_temperature(temp_str: str) -> int:
     return temp
 
 
-def test_temperature() -> None:
-    data = "25"
-    print(f"Input data is '{data}'")
-    try:
-        temp = input_temperature(data)
-        print(f"Temperature is now {temp}°C\n")
-    except ValueError as e:
-        print(f"Caught input_temperature error: {e}\n")
+def test_temperature(data: str) -> None:
 
-    data = "abc"
-    print(f"Input data is '{data}'")
-    try:
-        temp = input_temperature(data)
-        print(f"Temperature is now {temp}°C\n")
-    except ValueError as e:
-        print(f"Caught input_temperature error: {e}\n")
-
-    data = "100"
-    print(f"Input data is '{data}'")
-    try:
-        temp = input_temperature(data)
-        print(f"Temperature is now {temp}°C\n")
-    except ValueError as e:
-        print(f"Caught input_temperature error: {e}\n")
-
-    data = "-50"
     print(f"Input data is '{data}'")
     try:
         temp = input_temperature(data)
@@ -44,7 +20,10 @@ def test_temperature() -> None:
 
 def main() -> None:
     print("=== Garden Temperature ===\n")
-    test_temperature()
+    test_temperature("25")
+    test_temperature("abc")
+    test_temperature("100")
+    test_temperature("-50")
     print("All tests completed - program didn't crash!")
 
 

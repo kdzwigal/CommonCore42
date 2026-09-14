@@ -1,5 +1,3 @@
-import typing
-
 from ex0 import AquaFactory, CreatureFactory, FlameFactory
 from ex1 import HealingCreatureFactory, TransformCreatureFactory
 from ex2 import (
