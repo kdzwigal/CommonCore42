@@ -22,7 +22,7 @@ def main() -> None:
     players = ["alice", "charlie", "dylan", "bob"]
     actions = ["run", "grab", "move", "jump", "use", "climb"]
     event_gen = gen_event(players, actions)
-    for i in range(0, 999):
+    for i in range(1000):
         event = next(event_gen)
         print(f"Event {i}: Player {event[0]} did action {event[1]}")
     ten_tupl = []
@@ -30,8 +30,8 @@ def main() -> None:
         event = next(event_gen)
         ten_tupl.append(event)
     print(f"Built list of 10 events: {ten_tupl}")
-    for consumed_event in consume_event(ten_tupl):
-        print(f"Got event from list: {consumed_event}")
+    for consumed in consume_event(ten_tupl):
+        print(f"Got event from list: {consumed}")
         print(f"Remains in list: {ten_tupl}")
 
 

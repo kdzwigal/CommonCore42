@@ -8,7 +8,7 @@ def main() -> None:
     arguments = len(sys.argv)
     if arguments == 1:
         print("No arguments provided!")
-    if arguments > 1:
+    elif arguments > 1:
         print(f"Arguments received: {arguments - 1}")
     i = 1
     while i < arguments:
