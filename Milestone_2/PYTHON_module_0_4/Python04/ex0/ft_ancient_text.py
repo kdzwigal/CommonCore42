@@ -14,7 +14,7 @@ def op_file(name: str) -> None:
     print(f"Accessing file '{name}'")
     try:
         file = open(name, "r")
-    except FileNotFoundError as e:
+    except OSError as e:
         print(f"Error opening file '{name}': {e}")
         file = None
     if file is not None:

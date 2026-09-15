@@ -17,19 +17,19 @@ def add_hash_and_save(file: typing.IO[str]) -> None:
         print(line)
     print("\n---")
     print("Enter new file name (or empty): ", end="", flush=True)
-    new_file = sys.stdin.readline().rstrip('\n')
+    new_file = sys.stdin.readline().rstrip('\n').strip()
 
-    if new_file == "":
+    if not new_file:
         print("Not saving data.")
         return
-    elif new_file:
+    else:
         print(f"Saving data to '{new_file}'")
         try:
-            with open(new_file, "w") as file:
-                file.write(new_tekst)
+            with open(new_file, "w") as newfile:
+                newfile.write(new_tekst)
                 print(f"Data saved in file '{new_file}'.")
         except OSError as e:
-            print(f"[STDERR] Error opening file '{new_file}': {e}",
+            print(f"[STDERR] Error saving file '{new_file}': {e}",
                   file=sys.stderr)
 
 
@@ -58,7 +58,7 @@ def op_file(name: str) -> None:
         with open(name, "r") as file:
             add_hash_and_save(file)
     except OSError as e:
-        print(f"[STDERR] Error opening file '{name}': {e}", file=sys.stderr)
+        print(f"[STDERR] Error saving file '{name}': {e}", file=sys.stderr)
 
 
 def main() -> None:

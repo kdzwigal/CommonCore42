@@ -12,15 +12,18 @@ def add_hash_and_save(file: typing.IO[str]) -> None:
     for line in new_tekst.splitlines():
         print(line)
     print("\n---")
-    new_file = str(input("Enter new file name (or empty): "))
+    new_file = str(input("Enter new file name (or empty): ").strip())
     if new_file == "":
         print("Not saving data.")
         return
-    elif new_file:
+    else:
         print(f"Saving data to '{new_file}'")
-        with open(new_file, "w") as file:
-            file.write(new_tekst)
-            print(f"Data saved in file '{new_file}'.")
+        try:
+            with open(new_file, "w") as file:
+                file.write(new_tekst)
+                print(f"Data saved in file '{new_file}'.")
+        except OSError as e:
+            print(f"Error saving file '{new_file}': {e}")
 
 
 def read_and_print(file: typing.IO[str]) -> None:
@@ -34,7 +37,7 @@ def op_file(name: str) -> None:
     print(f"Accessing file '{name}'")
     try:
         file = open(name, "r")
-    except FileNotFoundError as e:
+    except OSError as e:
         print(f"Error opening file '{name}': {e}")
         file = None
     if file is not None:

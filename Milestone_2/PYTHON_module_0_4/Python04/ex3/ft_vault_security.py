@@ -7,7 +7,7 @@ def secure_archive(file_name: str, opt: str, to_write: str) \
 
     if opt.lower() == "write":
         try:
-            with open(file_name, "x") as file:
+            with open(file_name, "w") as file:
                 print("Using 'secure_archive' to write previous content to "
                       "a new file:")
                 file.write(to_write)
@@ -19,7 +19,7 @@ def secure_archive(file_name: str, opt: str, to_write: str) \
         except OSError as e:
             f_send = (False, str(e))
             return f_send
-    else:
+    elif opt.lower() == "read":
         try:
             with open(file_name, "r") as file:
                 print("Using 'secure_archive' to read from a regular file:")
@@ -38,15 +38,20 @@ def secure_archive(file_name: str, opt: str, to_write: str) \
         except OSError as e:
             print("Using 'secure_archive' with Error:")
             return False, str(e)
+    else:
+        print("Using 'secure_archive' with wrong arguments:")
+        return False, "Only <read> or <write> are allowed!"
 
 
 def archive_test() -> None:
     print("=== Cyber Archives Security ===\n")
     print(secure_archive("/not/existing/file", "read", ""))
     print("")
-    print(secure_archive("nonaccess", "read", ""))
+    print(secure_archive("2", "read", ""))
     print("")
-    print(secure_archive("test", "read", ""))
+    print(secure_archive("2", "reado", ""))
+    print("")
+    print(secure_archive("test1.txt", "read", ""))
     print("")
     print(secure_archive("test1.txt", "write", "Lorem ipsum..."))
 
@@ -65,7 +70,7 @@ def main() -> None:
         status = secure_archive(sys.argv[1], sys.argv[2], sys.argv[3])
         print(status)
     else:
-        print("Too much arguments! Usage: ft_vault.py <file> "
+        print("Too many arguments! Usage: ft_vault.py <file> "
               "<read/write> <if write: string to write>")
 
     sys.exit(0)
