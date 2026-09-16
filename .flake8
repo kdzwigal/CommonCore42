@@ -7,4 +7,6 @@ exclude =
     env,
     build,
     dist,
-    day_night.py
+    day_night.py,
+    pygamekruskal.py,
+    matrix_env

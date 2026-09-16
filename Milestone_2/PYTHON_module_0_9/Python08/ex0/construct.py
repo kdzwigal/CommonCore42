@@ -2,6 +2,7 @@ import sys
 import os
 import site
 
+
 def main():
     is_venv = sys.prefix != sys.base_prefix
 
@@ -13,7 +14,8 @@ def main():
         print(f"Virtual Environment: {venv_name}")
         print(f"Environment Path: {sys.prefix}\n")
         print("SUCCESS: You're in an isolated environment!")
-        print("Safe to install packages without affecting the global system.\n")
+        print("Safe to install packages without affecting the "
+              "global system.\n")
         print("Package installation path:")
 
         site_packages = ""
@@ -39,6 +41,7 @@ def main():
         print("source matrix_env/bin/activate # On Unix")
         print("matrix_env\\Scripts\\activate # On Windows")
         print("Then run this program again.")
+
 
 if __name__ == "__main__":
     main()
