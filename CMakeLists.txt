@@ -1,0 +1,154 @@
+cmake_minimum_required(VERSION 4.0)
+project(CommonCore42)
+
+set(CMAKE_CXX_STANDARD 14)
+
+include_directories(Milestone_0/libft)
+include_directories(Milestone_1/GetNextLine/bonus)
+include_directories(Milestone_1/GetNextLine/get_next_line)
+include_directories(Milestone_1/Printf/ft_printf)
+include_directories(Milestone_1/Printf/printfTester/utils)
+include_directories(Milestone_1/PushSwap)
+include_directories(Milestone_1/PushSwap/bonus)
+include_directories(Reloaded/ex22)
+include_directories(Reloaded/ex23)
+
+add_executable(CommonCore42
+        Milestone_0/libft/ft_atoi.c
+        Milestone_0/libft/ft_bzero.c
+        Milestone_0/libft/ft_calloc.c
+        Milestone_0/libft/ft_isalnum.c
+        Milestone_0/libft/ft_isalpha.c
+        Milestone_0/libft/ft_isascii.c
+        Milestone_0/libft/ft_isdigit.c
+        Milestone_0/libft/ft_isprint.c
+        Milestone_0/libft/ft_itoa.c
+        Milestone_0/libft/ft_lstadd_back.c
+        Milestone_0/libft/ft_lstadd_front.c
+        Milestone_0/libft/ft_lstclear.c
+        Milestone_0/libft/ft_lstdelone.c
+        Milestone_0/libft/ft_lstiter.c
+        Milestone_0/libft/ft_lstlast.c
+        Milestone_0/libft/ft_lstmap.c
+        Milestone_0/libft/ft_lstnew.c
+        Milestone_0/libft/ft_lstsize.c
+        Milestone_0/libft/ft_memchr.c
+        Milestone_0/libft/ft_memcmp.c
+        Milestone_0/libft/ft_memcpy.c
+        Milestone_0/libft/ft_memmove.c
+        Milestone_0/libft/ft_memset.c
+        Milestone_0/libft/ft_putchar_fd.c
+        Milestone_0/libft/ft_putendl_fd.c
+        Milestone_0/libft/ft_putnbr_fd.c
+        Milestone_0/libft/ft_putstr_fd.c
+        Milestone_0/libft/ft_split.c
+        Milestone_0/libft/ft_strchr.c
+        Milestone_0/libft/ft_strdup.c
+        Milestone_0/libft/ft_striteri.c
+        Milestone_0/libft/ft_strjoin.c
+        Milestone_0/libft/ft_strlcat.c
+        Milestone_0/libft/ft_strlcpy.c
+        Milestone_0/libft/ft_strlen.c
+        Milestone_0/libft/ft_strmapi.c
+        Milestone_0/libft/ft_strncmp.c
+        Milestone_0/libft/ft_strnstr.c
+        Milestone_0/libft/ft_strrchr.c
+        Milestone_0/libft/ft_strtrim.c
+        Milestone_0/libft/ft_substr.c
+        Milestone_0/libft/ft_tolower.c
+        Milestone_0/libft/ft_toupper.c
+        Milestone_0/libft/libft.h
+        Milestone_0/main.c
+        Milestone_1/GetNextLine/bonus/get_next_line_bonus.c
+        Milestone_1/GetNextLine/bonus/get_next_line_bonus.h
+        Milestone_1/GetNextLine/bonus/get_next_line_utils_bonus.c
+        Milestone_1/GetNextLine/bonus/main_bonus.c
+        Milestone_1/GetNextLine/get_next_line/get_next_line.c
+        Milestone_1/GetNextLine/get_next_line/get_next_line.h
+        Milestone_1/GetNextLine/get_next_line/get_next_line_bonus.c
+        Milestone_1/GetNextLine/get_next_line/get_next_line_bonus.h
+        Milestone_1/GetNextLine/get_next_line/get_next_line_utils.c
+        Milestone_1/GetNextLine/get_next_line/get_next_line_utils_bonus.c
+        "Milestone_1/GetNextLine/get_next_line copy.c"
+        Milestone_1/GetNextLine/main.c
+        Milestone_1/Printf/ft_printf/ft_printf.c
+        Milestone_1/Printf/ft_printf/ft_printf.h
+        Milestone_1/Printf/ft_printf/print_hex.c
+        Milestone_1/Printf/ft_printf/print_scn.c
+        Milestone_1/Printf/printfTester/tests/+_test.cpp
+        Milestone_1/Printf/printfTester/tests/0_test.cpp
+        Milestone_1/Printf/printfTester/tests/c_test.cpp
+        Milestone_1/Printf/printfTester/tests/d_test.cpp
+        Milestone_1/Printf/printfTester/tests/dot_test.cpp
+        Milestone_1/Printf/printfTester/tests/i_test.cpp
+        Milestone_1/Printf/printfTester/tests/minus_test.cpp
+        Milestone_1/Printf/printfTester/tests/mix_test.cpp
+        Milestone_1/Printf/printfTester/tests/p_test.cpp
+        Milestone_1/Printf/printfTester/tests/percent_test.cpp
+        Milestone_1/Printf/printfTester/tests/s_test.cpp
+        Milestone_1/Printf/printfTester/tests/sharp_test.cpp
+        Milestone_1/Printf/printfTester/tests/space_test.cpp
+        Milestone_1/Printf/printfTester/tests/u_test.cpp
+        Milestone_1/Printf/printfTester/tests/upperx_test.cpp
+        Milestone_1/Printf/printfTester/tests/x_test.cpp
+        Milestone_1/Printf/printfTester/utils/check.cpp
+        Milestone_1/Printf/printfTester/utils/check.hpp
+        Milestone_1/Printf/printfTester/utils/color.cpp
+        Milestone_1/Printf/printfTester/utils/color.hpp
+        Milestone_1/Printf/printfTester/utils/leaks.cpp
+        Milestone_1/Printf/printfTester/utils/leaks.hpp
+        Milestone_1/Printf/printfTester/utils/print.hpp
+        Milestone_1/Printf/printfTester/utils/sigsegv.cpp
+        Milestone_1/Printf/printfTester/utils/sigsegv.hpp
+        Milestone_1/Printf/main.c
+        Milestone_1/Printf/test.c
+        Milestone_1/PushSwap/bonus/operations/ps_push.c
+        Milestone_1/PushSwap/bonus/operations/ps_rev_rotate.c
+        Milestone_1/PushSwap/bonus/operations/ps_rotate.c
+        Milestone_1/PushSwap/bonus/operations/ps_swap.c
+        Milestone_1/PushSwap/bonus/checker.h
+        Milestone_1/PushSwap/bonus/checker_utils.c
+        Milestone_1/PushSwap/bonus/ft_split.c
+        Milestone_1/PushSwap/bonus/handle_error.c
+        Milestone_1/PushSwap/bonus/main.c
+        Milestone_1/PushSwap/bonus/parser.c
+        Milestone_1/PushSwap/operations/ps_push.c
+        Milestone_1/PushSwap/operations/ps_rev_rotate.c
+        Milestone_1/PushSwap/operations/ps_rotate.c
+        Milestone_1/PushSwap/operations/ps_swap.c
+        Milestone_1/PushSwap/ft_printf.c
+        Milestone_1/PushSwap/ft_printf_put.c
+        Milestone_1/PushSwap/ft_split.c
+        Milestone_1/PushSwap/handle_error.c
+        Milestone_1/PushSwap/init_and_start.c
+        Milestone_1/PushSwap/main.c
+        Milestone_1/PushSwap/parser.c
+        Milestone_1/PushSwap/parser_utils.c
+        Milestone_1/PushSwap/push_swap.h
+        Milestone_1/PushSwap/push_swap_utils.c
+        Milestone_1/PushSwap/sort_complex.c
+        Milestone_1/PushSwap/sort_complex_utils.c
+        Milestone_1/PushSwap/sort_medium.c
+        Milestone_1/PushSwap/sort_medium_utils.c
+        Milestone_1/PushSwap/sort_simple.c
+        Reloaded/ex06/ft_print_alphabet.c
+        Reloaded/ex07/ft_print_numbers.c
+        Reloaded/ex08/ft_is_negative.c
+        Reloaded/ex09/ft_ft.c
+        Reloaded/ex10/ft_swap.c
+        Reloaded/ex11/ft_div_mod.c
+        Reloaded/ex12/ft_iterative_factorial.c
+        Reloaded/ex13/ft_recursive_factorial.c
+        Reloaded/ex14/ft_sqrt.c
+        Reloaded/ex15/ft_putstr.c
+        Reloaded/ex16/ft_strlen.c
+        Reloaded/ex17/ft_strcmp.c
+        Reloaded/ex18/ft_print_params.c
+        Reloaded/ex19/ft_sort_params.c
+        Reloaded/ex20/ft_strdup.c
+        Reloaded/ex21/ft_range.c
+        Reloaded/ex22/ft_abs.h
+        Reloaded/ex23/ft_point.h
+        Reloaded/ex25/ft_foreach.c
+        Reloaded/ex26/ft_count_if.c
+        Reloaded/ex27/ft_display_file.c)
