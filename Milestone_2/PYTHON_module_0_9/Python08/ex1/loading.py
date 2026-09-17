@@ -49,14 +49,16 @@ def run_matrix_analysis():
     df = pd.DataFrame({'Time': time_index, 'Signal': signal})
     # Obliczenie średniej kroczącej, aby wygładzić sygnał
     df['Clean_Signal'] = df['Signal'].rolling(window=15).mean()
+    df_clean = df.dropna()
 
     print("Generating visualization...")
 
+
     # Wykres matplotlib
     plt.figure(figsize=(10, 6))
-    plt.plot(df['Time'], df['Signal'], color='gray', alpha=0.3,
+    plt.plot(df_clean['Time'], df_clean['Signal'], color='gray', alpha=0.3,
              label='Raw Data Stream')
-    plt.plot(df['Time'], df['Clean_Signal'], color='green', linewidth=2,
+    plt.plot(df_clean['Time'], df_clean['Clean_Signal'], color='green', linewidth=2,
              label='Decoded Signal')
     plt.title('Matrix Data Stream Analysis')
     plt.xlabel('Time (ms)')

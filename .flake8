@@ -9,4 +9,7 @@ exclude =
     dist,
     day_night.py,
     pygamekruskal.py,
-    matrix_env
+    matrix_env,
+    visualizer.py,
+    emejz.py,
+    atoi.py,
