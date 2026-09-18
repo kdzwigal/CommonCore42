@@ -1,0 +1,12 @@
+# Ignore real .env
+.env
+
+# Ignore virtual env
+venv/
+.venv/
+env/
+matrix_env/
+
+# Ignore Python cache
+__pycache__/
+*.pyc
