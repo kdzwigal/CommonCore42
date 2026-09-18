@@ -13,3 +13,5 @@ exclude =
     visualizer.py,
     emejz.py,
     atoi.py,
+    mission_env,
+    data_generator,
