@@ -1,12 +1,11 @@
 from enum import Enum
 from datetime import datetime
-from typing import Self
-
-from pydantic import BaseModel, Field, model_validator, ValidationError
-
+try:
+    from pydantic import BaseModel, Field, model_validator, ValidationError
+except:
+    print("Pydantic is not installed ---> pip install pydantic")
 
 class ContactType(str, Enum):
-    """Enumeration for alien contact types."""
     RADIO = "radio"
     VISUAL = "visual"
     PHYSICAL = "physical"
@@ -14,7 +13,6 @@ class ContactType(str, Enum):
 
 
 class AlienContact(BaseModel):
-    """Pydantic model representing an alien contact report with business rules."""
 
     contact_id: str = Field(..., min_length=5, max_length=15)
     timestamp: datetime
@@ -27,25 +25,18 @@ class AlienContact(BaseModel):
     is_verified: bool = False
 
     @model_validator(mode='after')
-    def validate_business_rules(self) -> Self:
-        """
-        Validates complex business rules that depend on multiple fields.
-        Runs after basic type and Field constraints are checked.
-        """
-        # Rule 1: Contact ID must start with "AC"
+    def validate_business_rules(self) -> 'AlienContact':
+
         if not self.contact_id.startswith("AC"):
             raise ValueError('Contact ID must start with "AC"')
 
-        # Rule 2: Physical contact reports must be verified
         if self.contact_type == ContactType.PHYSICAL and not self.is_verified:
             raise ValueError("Physical contact reports must be verified")
 
-        # Rule 3: Telepathic contact requires at least 3 witnesses
         if self.contact_type == ContactType.TELEPATHIC and self.witness_count < 3:
             raise ValueError(
                 "Telepathic contact requires at least 3 witnesses")
 
-        # Rule 4: Strong signals (> 7.0) should include received messages
         if self.signal_strength > 7.0 and not self.message_received:
             raise ValueError(
                 "Strong signals (> 7.0) should include received messages")
@@ -57,19 +48,24 @@ def main() -> None:
     print("Alien Contact Log Validation")
     print("======================================")
 
-    # 1. Tworzenie prawidłowej instancji (Valid contact)
+
+    valid_data = """
+    {
+        "contact_id": "AC_2024_006",
+        "timestamp": "2024-02-02T00:00:00",
+        "location": "Area 51, Nevada",
+        "contact_type": "radio",
+        "signal_strength": 2.7,
+        "duration_minutes": 20,
+        "witness_count": 14,
+        "message_received": null,
+        "is_verified": false
+    }
+    """
+
     try:
-        valid_contact = AlienContact(
-            contact_id="AC_2024_001",
-            timestamp="2024-05-15T10:30:00Z",
-            location="Area 51, Nevada",
-            contact_type=ContactType.RADIO,
-            signal_strength=8.5,
-            duration_minutes=45,
-            witness_count=5,
-            message_received="Greetings from Zeta Reticuli",
-            is_verified=True
-        )
+        valid_contact = AlienContact.model_validate_json(valid_data)
+
         print("Valid contact report:")
         print(f"ID: {valid_contact.contact_id}")
         print(f"Type: {valid_contact.contact_type.value}")
@@ -84,29 +80,29 @@ def main() -> None:
 
     print("======================================")
 
-    # 2. Próba utworzenia nieprawidłowej instancji (Invalid contact)
+    invalid_data = """
+    {
+        "contact_id": "AC_2024_005",
+        "timestamp": "2024-09-10T00:00:00",
+        "location": "SETI Institute, California",
+        "contact_type": "telepathic",
+        "signal_strength": 6.4,
+        "duration_minutes": 134,
+        "witness_count": 2,
+        "message_received": "Warning about solar flare activity",
+        "is_verified": false
+    }
+    """
+
     try:
-        invalid_contact = AlienContact(
-            contact_id="AC_2024_002",
-            timestamp="2024-05-15T11:00:00Z",
-            location="Mars Base Alpha",
-            contact_type=ContactType.TELEPATHIC,
-            signal_strength=4.0,
-            duration_minutes=15,
-            witness_count=2,
-            # BŁĄD: Wymagane są minimum 3 osoby przy kontakcie telepatycznym
-            message_received=None,
-            is_verified=True
-        )
+        invalid_contact = AlienContact.model_validate_json(invalid_data)
+
         print(f"Invalid contact somehow created: {invalid_contact.contact_id}")
 
     except ValidationError as e:
         print("Expected validation error:")
-        # Wyciągamy czysty komunikat wygenerowany przez naszą asercję ValueError
         for error in e.errors():
             msg = error.get("msg", "")
-            # Pydantic domyślnie dokleja "Value error, " przed naszym komunikatem z ValueError,
-            # więc formatujemy to do oczekiwanego przez projekt outputu
             clean_msg = msg.replace("Value error, ", "")
             print(clean_msg)
 

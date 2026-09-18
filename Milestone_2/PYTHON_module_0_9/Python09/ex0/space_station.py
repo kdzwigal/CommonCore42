@@ -1,9 +1,11 @@
 from datetime import datetime
-from pydantic import BaseModel, Field, ValidationError
 
+try:
+    from pydantic import BaseModel, Field, ValidationError
+except ImportError:
+    print("------>      pip install pydantic")
 
 class SpaceStation(BaseModel):
-    """Pydantic model representing a space station with validation rules."""
 
     station_id: str = Field(..., min_length=3, max_length=10)
     name: str = Field(..., min_length=1, max_length=50)
@@ -32,7 +34,6 @@ def main() -> None:
     print("Space Station Data Validation")
     print("========================================")
 
-    # 1. Tworzenie prawidłowej instancji (Valid station)
     try:
         valid_station = SpaceStation.model_validate_json(json_string_ok)
 
@@ -64,23 +65,17 @@ def main() -> None:
     }
     """
 
-    # 2. Próba utworzenia nieprawidłowej instancji (Invalid station)
     try:
-        # Przypisujemy nieprawidłową wartość m.in. do crew_size (> 20)
         invalid_station = SpaceStation.model_validate_json(json_string_ko)
 
-        # Ta linijka nie powinna się nigdy wykonać z powodu błędu walidacji
         print(f"Invalid station somehow created: {invalid_station.station_id}")
 
     except ValidationError as e:
         print("Expected validation error:")
-        # Wyłapujemy tylko komunikat z błędem dla zmiennej 'crew_size',
-        # aby dopasować to idealnie do oczekiwanego wyniku (Expected Output)
         for error in e.errors():
-            if "crew_size" in error.get("loc", []):
-                print(error.get("msg"))
-            else:
-                print(error.get("msg"))
+            msg = error.get("msg", "")
+            clean_msg = msg.replace("Value error, ", "")
+            print(clean_msg)
 
 
 if __name__ == "__main__":

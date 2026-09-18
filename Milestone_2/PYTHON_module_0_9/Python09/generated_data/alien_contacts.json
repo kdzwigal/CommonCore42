@@ -55,17 +55,6 @@
     "is_verified": false
   },
   {
-    "contact_id": "AC_2024_006",
-    "timestamp": "2024-02-02T00:00:00",
-    "location": "Area 51, Nevada",
-    "contact_type": "radio",
-    "signal_strength": 2.7,
-    "duration_minutes": 20,
-    "witness_count": 14,
-    "message_received": null,
-    "is_verified": false
-  },
-  {
     "contact_id": "AC_2024_007",
     "timestamp": "2024-03-25T00:00:00",
     "location": "Atacama Desert, Chile",
