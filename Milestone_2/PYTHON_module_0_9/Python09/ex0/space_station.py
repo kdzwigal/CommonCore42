@@ -56,8 +56,8 @@ def main() -> None:
         "station_id": "ISS877",
         "name": "Mars Orbital Platform",
         "crew_size": 30,
-        "power_level": 79.7,
-        "oxygen_level": 87.2,
+        "power_level": 179.7,
+        "oxygen_level": 187.2,
         "last_maintenance": "2023-10-06T00:00:00",
         "is_operational": false,
         "notes": "System diagnostics required"
@@ -78,6 +78,8 @@ def main() -> None:
         # aby dopasować to idealnie do oczekiwanego wyniku (Expected Output)
         for error in e.errors():
             if "crew_size" in error.get("loc", []):
+                print(error.get("msg"))
+            else:
                 print(error.get("msg"))
 
 
