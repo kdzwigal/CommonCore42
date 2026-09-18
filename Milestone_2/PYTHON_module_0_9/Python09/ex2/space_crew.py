@@ -1,11 +1,12 @@
 from enum import Enum
 from datetime import datetime
 from typing_extensions import Self
-from pydantic import BaseModel, Field, model_validator, ValidationError
-
+try:
+    from pydantic import BaseModel, Field, model_validator, ValidationError
+except ImportError:
+    print("Pydantic is not installed ---->>>  pip install pydantic")
 
 class Rank(str, Enum):
-    """Enumeration for crew member ranks."""
     CADET = "cadet"
     OFFICER = "officer"
     LIEUTENANT = "lieutenant"
@@ -14,7 +15,6 @@ class Rank(str, Enum):
 
 
 class CrewMember(BaseModel):
-    """Model representing an individual crew member."""
 
     member_id: str = Field(..., min_length=3, max_length=10)
     name: str = Field(..., min_length=2, max_length=50)
@@ -26,29 +26,22 @@ class CrewMember(BaseModel):
 
 
 class SpaceMission(BaseModel):
-    """Model representing a space mission with a nested list of crew members."""
 
     mission_id: str = Field(..., min_length=5, max_length=15)
     mission_name: str = Field(..., min_length=3, max_length=100)
     destination: str = Field(..., min_length=3, max_length=50)
     launch_date: datetime
     duration_days: int = Field(..., ge=1, le=3650)
-
-    # W Pydantic v2 min_length i max_length działają również dla struktury list!
     crew: list[CrewMember] = Field(..., min_length=1, max_length=12)
     mission_status: str = "planned"
     budget_millions: float = Field(..., ge=1.0, le=10000.0)
 
     @model_validator(mode='after')
     def validate_mission_rules(self) -> Self:
-        """
-        Validates safety requirements and crew dependencies for the mission.
-        """
-        # Rule 1: Mission ID must start with "M"
+
         if not self.mission_id.startswith("M"):
             raise ValueError('Mission ID must start with "M"')
 
-        # Rule 2: Must have at least one Commander or Captain
         has_leader = any(
             member.rank in [Rank.COMMANDER, Rank.CAPTAIN] for member in
             self.crew)
@@ -56,15 +49,14 @@ class SpaceMission(BaseModel):
             raise ValueError(
                 "Mission must have at least one Commander or Captain")
 
-        # Rule 3: Long missions (> 365 days) need 50% experienced crew (5+ years)
         if self.duration_days > 365:
             experienced_count = sum(
                 1 for member in self.crew if member.years_experience >= 5)
+            print(experienced_count)
             if experienced_count / len(self.crew) < 0.5:
-                raise ValueError(
-                    "Long missions (> 365 days) need at least 50% experienced crew (5+ years)")
+                raise ValueError("Long missions (> 365 days) need at "
+                                 "least 50% experienced crew (5+ years)")
 
-        # Rule 4: All crew members must be active
         if not all(member.is_active for member in self.crew):
             raise ValueError("All crew members must be active")
 
@@ -75,31 +67,65 @@ def main() -> None:
     print("Space Mission Crew Validation")
     print("=========================================")
 
-    # Przygotowanie instancji członków załogi
-    sarah = CrewMember(
-        member_id="C001", name="Sarah Connor", rank=Rank.COMMANDER,
-        age=45, specialization="Mission Command", years_experience=20
-    )
-    john = CrewMember(
-        member_id="C002", name="John Smith", rank=Rank.LIEUTENANT,
-        age=35, specialization="Navigation", years_experience=10
-    )
-    alice = CrewMember(
-        member_id="C003", name="Alice Johnson", rank=Rank.OFFICER,
-        age=28, specialization="Engineering", years_experience=6
-    )
-
-    # 1. Tworzenie prawidłowej misji
+    valid_data = """  
+    {
+    "mission_id": "M2024_TITAN",
+    "mission_name": "Solar Observatory Research Mission",
+    "destination": "Solar Observatory",
+    "launch_date": "2024-03-30T00:00:00",
+    "duration_days": 451,
+    "crew": [
+      {
+        "member_id": "CM001",
+        "name": "Sarah Williams",
+        "rank": "captain",
+        "age": 43,
+        "specialization": "Mission Command",
+        "years_experience": 19,
+        "is_active": true
+      },
+      {
+        "member_id": "CM002",
+        "name": "James Hernandez",
+        "rank": "captain",
+        "age": 43,
+        "specialization": "Pilot",
+        "years_experience": 30,
+        "is_active": true
+      },
+      {
+        "member_id": "CM003",
+        "name": "Anna Jones",
+        "rank": "cadet",
+        "age": 35,
+        "specialization": "Communications",
+        "years_experience": 15,
+        "is_active": true
+      },
+      {
+        "member_id": "CM004",
+        "name": "David Smith",
+        "rank": "commander",
+        "age": 27,
+        "specialization": "Security",
+        "years_experience": 15,
+        "is_active": true
+      },
+      {
+        "member_id": "CM005",
+        "name": "Maria Jones",
+        "rank": "cadet",
+        "age": 55,
+        "specialization": "Research",
+        "years_experience": 30,
+        "is_active": true
+      }
+    ],
+    "mission_status": "planned",
+    "budget_millions": 2208.1
+    }"""
     try:
-        valid_mission = SpaceMission(
-            mission_id="M2024_MARS",
-            mission_name="Mars Colony Establishment",
-            destination="Mars",
-            launch_date="2024-10-01T12:00:00Z",
-            duration_days=900,
-            crew=[sarah, john, alice],
-            budget_millions=2500.0
-        )
+        valid_mission = SpaceMission.model_validate_json(valid_data)
 
         print("Valid mission created:")
         print(f"Mission: {valid_mission.mission_name}")
@@ -113,23 +139,68 @@ def main() -> None:
             print(
                 f"- {member.name} ({member.rank.value}) - {member.specialization}")
 
+
     except ValidationError as e:
-        print(f"Unexpected validation error: {e}")
+        print("Expected validation error:")
+        for error in e.errors():
+            msg = error.get("msg", "").replace("Value error, ", "")
+            print(msg)
 
     print("=========================================")
 
-    # 2. Próba utworzenia misji z błędem walidacji na poziomie głównym (brak lidera)
+    invalid_data = """{
+    "mission_id": "AM2024_MARS",
+    "mission_name": "Jupiter Orbit Colony Mission",
+    "destination": "Jupiter Orbit",
+    "launch_date": "2024-10-01T00:00:00",
+    "duration_days": 1065,
+    "crew": [
+      {
+        "member_id": "CM011",
+        "name": "Emma Brown",
+        "rank": "commander",
+        "age": 49,
+        "specialization": "Mission Command",
+        "years_experience": 5,
+        "is_active": true
+      },
+      {
+        "member_id": "CM012",
+        "name": "John Hernandez",
+        "rank": "lieutenant",
+        "age": 36,
+        "specialization": "Science Officer",
+        "years_experience": 4,
+        "is_active": true
+      },
+      {
+        "member_id": "CM013",
+        "name": "Sofia Rodriguez",
+        "rank": "lieutenant",
+        "age": 29,
+        "specialization": "Life Support",
+        "years_experience": 2,
+        "is_active": true
+      },
+      {
+        "member_id": "CM014",
+        "name": "Sofia Lopez",
+        "rank": "lieutenant",
+        "age": 44,
+        "specialization": "Systems Analysis",
+        "years_experience": 4,
+        "is_active": true
+      }
+    ],
+    "mission_status": "planned",
+    "budget_millions": 4626.0
+    }"""
+
     try:
-        invalid_mission = SpaceMission(
-            mission_id="M2024_MOON",
-            mission_name="Lunar Base Resupply",
-            destination="Moon",
-            launch_date="2024-11-01T08:00:00Z",
-            duration_days=14,
-            crew=[john, alice],  # Brakuje Commander'a lub Captain'a
-            budget_millions=500.0
-        )
-        print(f"Invalid mission created: {invalid_mission.mission_id}")
+        invalid_mission = SpaceMission.model_validate_json(invalid_data)
+
+        print(f"Invalid mission somehow created: {invalid_mission.mission_id}")
+
     except ValidationError as e:
         print("Expected validation error:")
         for error in e.errors():
