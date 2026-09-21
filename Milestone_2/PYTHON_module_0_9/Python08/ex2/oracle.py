@@ -35,16 +35,20 @@ def main():
     # Różnice w zachowaniu: Development vs Production
     if matrix_mode.lower() == "production":
         print(f"Mode: {matrix_mode}")
-        print("Database: Connected to SECURE PRODUCTION cluster")
-        print(f"API Access: Authenticated [STRICT]")
+        print(f"""Database: {'Connected to SECURE PRODUCTION cluster'
+        if db_url else 'missing'}""")
+        print("API Access: Authenticated [STRICT]")
         print(f"Log Level: {log_level or 'ERROR'}")
-        print("Zion Network: Secure VPN Online")
+        print(f"""Zion Network: {'Secure VPN Online' if zion_endpoint
+        else 'missing'}""")
     else:
         print(f"Mode: {matrix_mode}")
-        print("Database: Connected to local instance")
+        print(f"""Database: {'Connected to to local instance'
+        if db_url else 'missing'}""")
         print("API Access: Authenticated")
         print(f"Log Level: {log_level or 'DEBUG'}")
-        print("Zion Network: Online")
+        print(f"""Zion Network: {'Online' if zion_endpoint
+        else 'missing'}""")
 
     print("\nEnvironment security check:")
     print("[OK] No hardcoded secrets detected")

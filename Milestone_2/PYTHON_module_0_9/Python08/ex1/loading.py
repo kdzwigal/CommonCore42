@@ -39,7 +39,8 @@ def run_matrix_analysis():
     num_points = 1000
     print(f"Processing {num_points} data points...")
 
-    # Numpy jako wyłączne źródło danych (brak twardo zakodowanych list czy funkcji range)
+    # Numpy jako wyłączne źródło danych (brak twardo zakodowanych
+    # list czy funkcji range)
     # Symulacja zakłóceń sygnału w Matriksie
     time_index = np.linspace(0, 100, num_points)
     signal_noise = np.random.normal(0, 0.5, num_points)
@@ -51,7 +52,6 @@ def run_matrix_analysis():
     df['Clean_Signal'] = df['Signal'].rolling(window=15).mean()
 
     print("Generating visualization...")
-
 
     # Wykres matplotlib
     plt.figure(figsize=(10, 6))
