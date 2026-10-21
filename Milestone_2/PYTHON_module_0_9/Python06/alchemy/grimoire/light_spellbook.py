@@ -7,6 +7,6 @@ def light_spell_allowed_ingredients() -> list[str]:
 
 def light_spell_record(spell_name: str, ingredients: str) -> str:
     valid = lv.validate_ingredients(ingredients)
-    if "VALID" in valid:
+    if valid.endswith(" - VALID"):
         return f"Spell recorded: {spell_name} ({valid})"
     return f"Spell rejected: {spell_name} ({valid})"
