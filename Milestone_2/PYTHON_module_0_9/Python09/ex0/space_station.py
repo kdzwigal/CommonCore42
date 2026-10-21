@@ -5,6 +5,7 @@ try:
 except ImportError:
     print("------>      pip install pydantic")
 
+
 class SpaceStation(BaseModel):
 
     station_id: str = Field(..., min_length=3, max_length=10)

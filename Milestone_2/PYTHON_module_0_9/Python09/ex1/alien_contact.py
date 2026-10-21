@@ -2,8 +2,9 @@ from enum import Enum
 from datetime import datetime
 try:
     from pydantic import BaseModel, Field, model_validator, ValidationError
-except:
+except ImportError:
     print("Pydantic is not installed ---> pip install pydantic")
+
 
 class ContactType(str, Enum):
     RADIO = "radio"
@@ -33,7 +34,8 @@ class AlienContact(BaseModel):
         if self.contact_type == ContactType.PHYSICAL and not self.is_verified:
             raise ValueError("Physical contact reports must be verified")
 
-        if self.contact_type == ContactType.TELEPATHIC and self.witness_count < 3:
+        if (self.contact_type == ContactType.TELEPATHIC and
+                self.witness_count < 3):
             raise ValueError(
                 "Telepathic contact requires at least 3 witnesses")
 
@@ -47,7 +49,6 @@ class AlienContact(BaseModel):
 def main() -> None:
     print("Alien Contact Log Validation")
     print("======================================")
-
 
     valid_data = """
     {

@@ -6,6 +6,7 @@ try:
 except ImportError:
     print("Pydantic is not installed ---->>>  pip install pydantic")
 
+
 class Rank(str, Enum):
     CADET = "cadet"
     OFFICER = "officer"
@@ -67,7 +68,7 @@ def main() -> None:
     print("Space Mission Crew Validation")
     print("=========================================")
 
-    valid_data = """  
+    valid_data = """
     {
     "mission_id": "M2024_TITAN",
     "mission_name": "Solar Observatory Research Mission",
@@ -137,8 +138,8 @@ def main() -> None:
         print("Crew members:")
         for member in valid_mission.crew:
             print(
-                f"- {member.name} ({member.rank.value}) - {member.specialization}")
-
+                f"- {member.name} ({member.rank.value}) - "
+                f"{member.specialization}")
 
     except ValidationError as e:
         print("Expected validation error:")
