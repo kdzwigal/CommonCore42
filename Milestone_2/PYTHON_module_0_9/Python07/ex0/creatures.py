@@ -7,7 +7,7 @@ class Creature(ABC):
         self.type = type
 
     def describe(self) -> str:
-        return f"{self.name} is a {self.type.capitalize()} type Creature"
+        return f"{self.name} is a {self.type} type Creature"
 
     @abstractmethod
     def attack(self) -> str:
@@ -16,7 +16,7 @@ class Creature(ABC):
 
 class Flameling(Creature):
     def __init__(self) -> None:
-        super().__init__("Flameling", "FIre")
+        super().__init__("Flameling", "Fire")
 
     def attack(self) -> str:
         return f"{self.name} uses Ember!"

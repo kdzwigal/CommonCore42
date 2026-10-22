@@ -15,3 +15,4 @@ exclude =
     atoi.py,
     mission_env,
     data_generator,
+    matrix_venv,
