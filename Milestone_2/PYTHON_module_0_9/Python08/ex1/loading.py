@@ -1,7 +1,6 @@
 import sys
 import importlib
 
-# Definiujemy wymagane pakiety i ich opisy do wyświetlenia
 REQUIRED_PACKAGES = {
     'pandas': 'Data manipulation ready',
     'numpy': 'Numerical computation ready',
@@ -9,17 +8,15 @@ REQUIRED_PACKAGES = {
 }
 
 
-def check_dependencies():
+def check_dependencies() -> list[str]:
     print("LOADING STATUS: Loading programs...")
     print("Checking dependencies:")
 
-    missing_packages = []
+    missing_packages: List[str] = []
 
     for pkg, description in REQUIRED_PACKAGES.items():
         try:
-            # Próba dynamicznego zaimportowania modułu
             module = importlib.import_module(pkg)
-            # Pobranie wersji (jeśli moduł ją udostępnia)
             version = getattr(module, '__version__', 'unknown')
             print(f"[OK] {pkg} ({version}) - {description}")
         except ImportError:
@@ -28,9 +25,7 @@ def check_dependencies():
     return missing_packages
 
 
-def run_matrix_analysis():
-    # Moduły importujemy wewnątrz funkcji, ponieważ mamy już pewność,
-    # że pakiety zostały pomyślnie sprawdzone i istnieją w środowisku.
+def run_matrix_analysis() -> None:
     import numpy as np
     import pandas as pd
     import matplotlib.pyplot as plt
@@ -39,21 +34,16 @@ def run_matrix_analysis():
     num_points = 1000
     print(f"Processing {num_points} data points...")
 
-    # Numpy jako wyłączne źródło danych (brak twardo zakodowanych
-    # list czy funkcji range)
-    # Symulacja zakłóceń sygnału w Matriksie
     time_index = np.linspace(0, 100, num_points)
     signal_noise = np.random.normal(0, 0.5, num_points)
     signal = np.sin(time_index) + signal_noise
 
-    # Użycie pandas do manipulacji danymi
     df = pd.DataFrame({'Time': time_index, 'Signal': signal})
-    # Obliczenie średniej kroczącej, aby wygładzić sygnał
+
     df['Clean_Signal'] = df['Signal'].rolling(window=15).mean()
 
     print("Generating visualization...")
 
-    # Wykres matplotlib
     plt.figure(figsize=(10, 6))
     plt.plot(df['Time'], df['Signal'], color='gray', alpha=0.3,
              label='Raw Data Stream')
@@ -65,7 +55,6 @@ def run_matrix_analysis():
     plt.legend()
     plt.grid(True, linestyle='--', alpha=0.7)
 
-    # Zapis
     output_filename = 'matrix_analysis.png'
     plt.savefig(output_filename)
     plt.close()
@@ -82,14 +71,14 @@ def main():
         print(f"Cannot find: {', '.join(missing)}")
         print(
             "\nTo enter the Matrix, install dependencies using pip OR Poetry:")
-        print("-" * 55)
+        print("-" * 80)
         print("Using pip:")
         print("  pip install -r requirements.txt")
-        print("  python loading.py")
-        print("-" * 55)
+        print("  python3 loading.py")
+        print("-" * 80)
         print("Using Poetry:")
-        print("  poetry install")
-        print("  poetry run python loading.py")
+        print("  poetry install --no-root")
+        print("  poetry run python3 loading.py")
         sys.exit(1)
 
     run_matrix_analysis()

@@ -43,7 +43,7 @@ def main():
         else 'missing'}""")
     else:
         print(f"Mode: {matrix_mode}")
-        print(f"""Database: {'Connected to to local instance'
+        print(f"""Database: {'Connected to local instance'
         if db_url else 'missing'}""")
         print("API Access: Authenticated")
         print(f"Log Level: {log_level or 'DEBUG'}")
