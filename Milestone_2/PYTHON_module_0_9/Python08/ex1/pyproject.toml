@@ -1,0 +1,22 @@
+[project]
+name = "ex1-loading"
+version = "0.1.0"
+description = "Matrix data analysis program"
+authors = [
+    {name = "kdzwigal",email = "kdzwigal@student.42warsaw.pl"}
+]
+license = "MIT"
+
+[tool.poetry]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = "^1.25.0"
+pandas = "^2.1.0"
+matplotlib = "^3.7.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

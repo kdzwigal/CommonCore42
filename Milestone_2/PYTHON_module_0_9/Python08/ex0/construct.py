@@ -1,45 +1,49 @@
-import sys
 import os
 import site
+import sys
 
 
-def main():
-    is_venv = sys.prefix != sys.base_prefix
+def get_package_path() -> str:
+    """Safely retrieves the site-packages installation path."""
+    try:
+        if hasattr(site, "getsitepackages"):
+            paths: list[str] = site.getsitepackages()
+            for path in paths:
+                if "site-packages" in path:
+                    return path
+            if paths:
+                return paths[0]
+    except Exception as err:
+        return f"Unavailable ({err})"
+    return "Unknown"
+
+
+def main() -> None:
+    is_venv: bool = sys.prefix != sys.base_prefix
 
     if is_venv:
-        venv_name = os.path.basename(sys.prefix)
+        venv_name: str = os.path.basename(sys.prefix)
+        pkg_path: str = get_package_path()
 
-        print("\n\nMATRIX STATUS: Welcome to the construct\n")
+        print("MATRIX STATUS: Welcome to the construct\n")
         print(f"Current Python: {sys.executable}")
         print(f"Virtual Environment: {venv_name}")
         print(f"Environment Path: {sys.prefix}\n")
         print("SUCCESS: You're in an isolated environment!")
-        print("Safe to install packages without affecting the "
-              "global system.")
-        print("\nPackage installation path:")
-
-        site_packages = ""
-        if hasattr(site, 'getsitepackages'):
-            paths = site.getsitepackages()
-            for p in paths:
-                if 'site-packages' in p:
-                    site_packages = p
-                    break
-            if not site_packages and paths:
-                site_packages = paths[0]
-
-        print(site_packages)
-
+        print("Safe to install packages without affecting")
+        print("the global system.\n")
+        print("Package installation path:")
+        print(pkg_path)
     else:
-        print("\n\nMATRIX STATUS: You're still plugged in\n")
+        print("MATRIX STATUS: You're still plugged in\n")
         print(f"Current Python: {sys.executable}")
         print("Virtual Environment: None detected\n")
         print("WARNING: You're in the global environment!")
         print("The machines can see everything you install.\n")
         print("To enter the construct, run:")
-        print("python3 -m venv matrix_env")
+        print("python -m venv matrix_env")
         print("source matrix_env/bin/activate # On Unix")
-        print("matrix_env\\Scripts\\activate # On Windows")
+        print("matrix_env\\Scripts\\activate # On Windows\n")
         print("Then run this program again.")
 
 
