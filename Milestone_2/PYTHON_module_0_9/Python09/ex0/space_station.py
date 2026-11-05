@@ -32,6 +32,19 @@ def main() -> None:
         "notes": "System diagnostics required"
     }"""
 
+    json_string_ko = """
+    {
+        "station_id": "ISS877",
+        "name": "Mars Orbital Platform",
+        "crew_size": 30,
+        "power_level": 179.7,
+        "oxygen_level": 187.2,
+        "last_maintenance": "2023-10-06T00:00:00",
+        "is_operational": false,
+        "notes": "System diagnostics required"
+    }
+    """
+
     print("Space Station Data Validation")
     print("========================================")
 
@@ -52,19 +65,6 @@ def main() -> None:
         print(f"Expected validation error: \n {e}")
 
     print("========================================")
-
-    json_string_ko = """
-    {
-        "station_id": "ISS877",
-        "name": "Mars Orbital Platform",
-        "crew_size": 30,
-        "power_level": 179.7,
-        "oxygen_level": 187.2,
-        "last_maintenance": "2023-10-06T00:00:00",
-        "is_operational": false,
-        "notes": "System diagnostics required"
-    }
-    """
 
     try:
         invalid_station = SpaceStation.model_validate_json(json_string_ko)

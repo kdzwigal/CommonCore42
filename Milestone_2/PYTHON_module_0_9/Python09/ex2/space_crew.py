@@ -1,6 +1,5 @@
 from enum import Enum
 from datetime import datetime
-from typing_extensions import Self
 try:
     from pydantic import BaseModel, Field, model_validator, ValidationError
 except ImportError:
@@ -38,7 +37,7 @@ class SpaceMission(BaseModel):
     budget_millions: float = Field(..., ge=1.0, le=10000.0)
 
     @model_validator(mode='after')
-    def validate_mission_rules(self) -> Self:
+    def validate_mission_rules(self) -> 'SpaceMission':
 
         if not self.mission_id.startswith("M"):
             raise ValueError('Mission ID must start with "M"')
@@ -53,7 +52,7 @@ class SpaceMission(BaseModel):
         if self.duration_days > 365:
             experienced_count = sum(
                 1 for member in self.crew if member.years_experience >= 5)
-            print(experienced_count)
+
             if experienced_count / len(self.crew) < 0.5:
                 raise ValueError("Long missions (> 365 days) need at "
                                  "least 50% experienced crew (5+ years)")
