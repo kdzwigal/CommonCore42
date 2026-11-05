@@ -1,9 +1,10 @@
+import sys
 from datetime import datetime
 
 try:
-    from pydantic import BaseModel, Field, ValidationError
+    from pydantic import BaseModel, Field, ValidationError  # ignore[import]
 except ImportError:
-    print("------>      pip install pydantic")
+    sys.exit("------>      pip install pydantic")
 
 
 class SpaceStation(BaseModel):

@@ -1,9 +1,10 @@
+import sys
 from enum import Enum
 from datetime import datetime
 try:
     from pydantic import BaseModel, Field, model_validator, ValidationError
 except ImportError:
-    print("Pydantic is not installed ---->>>  pip install pydantic")
+    sys.exit("------>      pip install pydantic")
 
 
 class Rank(str, Enum):
