@@ -2,7 +2,8 @@ import sys
 from datetime import datetime
 
 try:
-    from pydantic import BaseModel, Field, ValidationError  # ignore[import]
+    from pydantic import (
+        BaseModel, Field, ValidationError)  # type: ignore[import]
 except ImportError:
     sys.exit("------>      pip install pydantic")
 
