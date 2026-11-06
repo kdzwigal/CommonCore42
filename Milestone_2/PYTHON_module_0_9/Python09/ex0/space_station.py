@@ -64,7 +64,11 @@ def main() -> None:
         print(f"Status: {status}")
 
     except ValidationError as e:
-        print(f"Expected validation error: \n {e}")
+        print("Unexpected validation error:")
+        for error in e.errors():
+            field = error["loc"][0]
+            msg = error["msg"]
+            print(f"Field {field}: {msg}")
 
     print("========================================")
 
@@ -76,9 +80,9 @@ def main() -> None:
     except ValidationError as e:
         print("Expected validation error:")
         for error in e.errors():
-            msg = error.get("msg", "")
-            clean_msg = msg.replace("Value error, ", "")
-            print(clean_msg)
+            field = error["loc"][0]
+            msg = error["msg"]
+            print(f"Field {field}: {msg}")
 
 
 if __name__ == "__main__":

@@ -19,7 +19,7 @@ class ContactType(str, Enum):
 class AlienContact(BaseModel):
 
     contact_id: str = Field(..., min_length=5, max_length=15)
-    timestamp: datetime
+    timestamp: datetime = Field(default_factory=datetime.now)
     location: str = Field(..., min_length=3, max_length=100)
     contact_type: ContactType
     signal_strength: float = Field(..., ge=0.0, le=10.0)
@@ -67,6 +67,20 @@ def main() -> None:
     }
     """
 
+    invalid_data = """
+        {
+            "contact_id": "AC_2024_005",
+            "timestamp": "2024-09-10T00:00:00",
+            "location": "SETI Institute, California",
+            "contact_type": "telepathic",
+            "signal_strength": 6.4,
+            "duration_minutes": 134,
+            "witness_count": 2,
+            "message_received": "Warning about solar flare activity",
+            "is_verified": false
+        }
+        """
+
     try:
         valid_contact = AlienContact.model_validate_json(valid_data)
 
@@ -80,35 +94,24 @@ def main() -> None:
         print(f"Message: '{valid_contact.message_received}'")
 
     except ValidationError as e:
-        print(f"Unexpected validation error: {e}")
+        print("Unexpected validation error:")
+        for error in e.errors():
+            field = error["loc"][0]
+            msg = error["msg"]
+            print(f"Field {field}: {msg}")
 
     print("======================================")
-
-    invalid_data = """
-    {
-        "contact_id": "AC_2024_005",
-        "timestamp": "2024-09-10T00:00:00",
-        "location": "SETI Institute, California",
-        "contact_type": "telepathic",
-        "signal_strength": 6.4,
-        "duration_minutes": 134,
-        "witness_count": 2,
-        "message_received": "Warning about solar flare activity",
-        "is_verified": false
-    }
-    """
 
     try:
         invalid_contact = AlienContact.model_validate_json(invalid_data)
 
-        print(f"Invalid contact somehow created: {invalid_contact.contact_id}")
+        print(f"Invalid contact somehow created! {invalid_contact.contact_id}")
 
     except ValidationError as e:
         print("Expected validation error:")
         for error in e.errors():
-            msg = error.get("msg", "")
-            clean_msg = msg.replace("Value error, ", "")
-            print(clean_msg)
+            msg = error["msg"]
+            print(f"{msg}")
 
 
 if __name__ == "__main__":

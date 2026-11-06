@@ -145,7 +145,7 @@ def main() -> None:
                 f"{member.specialization}")
 
     except ValidationError as e:
-        print("Expected validation error:")
+        print("Unexpected validation error:")
         for error in e.errors():
             msg = error.get("msg", "").replace("Value error, ", "")
             print(msg)
