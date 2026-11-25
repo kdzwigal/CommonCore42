@@ -1,6 +1,6 @@
 from enum import Enum
 
-from Pydantic import BaseModel, Field
+from pydantic import BaseModel, Field
 
 class Zone(str, Enum):
     normal = "normal"
@@ -40,3 +40,12 @@ class Connection(BaseModel):
 class FlyIn:
 
     grid: list[list[list[Hub]]] = [[[]]]
+
+if __name__ == "__main__":
+    hub1 = Hub(name="Hub1", x=0, y=0)
+    hub2 = Hub(name="Hub2", x=1, y=1)
+    connection = Connection(from_hub=hub1, to_hub=hub2, max_link_capacity=5)
+
+    print(hub1)
+    print(hub2)
+    print(connection)
